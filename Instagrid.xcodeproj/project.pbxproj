@@ -13,6 +13,9 @@
 		D3D623CB26068EDC00213277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3D623C926068EDC00213277 /* Main.storyboard */; };
 		D3D623CD26068EDD00213277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D623CC26068EDD00213277 /* Assets.xcassets */; };
 		D3D623D026068EDD00213277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3D623CE26068EDD00213277 /* LaunchScreen.storyboard */; };
+		D3DC15752606913D00544E32 /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DC15742606913D00544E32 /* ThirstySoftRegular.otf */; };
+		D3DC15782606914500544E32 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DC15772606914500544E32 /* Delm-Medium.otf */; };
+		D3DC15802606A26700544E32 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DC157F2606A26700544E32 /* ChoiceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		D3D623CC26068EDD00213277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3D623CF26068EDD00213277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3D623D126068EDD00213277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3DC15742606913D00544E32 /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
+		D3DC15772606914500544E32 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
+		D3DC157F2606A26700544E32 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		D3D623C226068EDC00213277 /* Instagrid */ = {
 			isa = PBXGroup;
 			children = (
-				D3D623C326068EDC00213277 /* AppDelegate.swift */,
-				D3D623C526068EDC00213277 /* SceneDelegate.swift */,
-				D3D623C726068EDC00213277 /* ViewController.swift */,
-				D3D623C926068EDC00213277 /* Main.storyboard */,
-				D3D623CC26068EDD00213277 /* Assets.xcassets */,
-				D3D623CE26068EDD00213277 /* LaunchScreen.storyboard */,
+				D3DC157D2606950800544E32 /* supporting files */,
+				D3DC157C260694FD00544E32 /* controller */,
+				D3DC157B260694F700544E32 /* view */,
+				D3DC157A260694E900544E32 /* model */,
 				D3D623D126068EDD00213277 /* Info.plist */,
 			);
 			path = Instagrid;
+			sourceTree = "<group>";
+		};
+		D3DC157A260694E900544E32 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		D3DC157B260694F700544E32 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				D3D623C926068EDC00213277 /* Main.storyboard */,
+				D3DC157F2606A26700544E32 /* ChoiceView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		D3DC157C260694FD00544E32 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				D3D623C726068EDC00213277 /* ViewController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		D3DC157D2606950800544E32 /* supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				D3D623CC26068EDD00213277 /* Assets.xcassets */,
+				D3D623CE26068EDD00213277 /* LaunchScreen.storyboard */,
+				D3D623C326068EDC00213277 /* AppDelegate.swift */,
+				D3DC15742606913D00544E32 /* ThirstySoftRegular.otf */,
+				D3DC15772606914500544E32 /* Delm-Medium.otf */,
+				D3D623C526068EDC00213277 /* SceneDelegate.swift */,
+			);
+			path = "supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +166,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D623D026068EDD00213277 /* LaunchScreen.storyboard in Resources */,
+				D3DC15782606914500544E32 /* Delm-Medium.otf in Resources */,
 				D3D623CD26068EDD00213277 /* Assets.xcassets in Resources */,
+				D3DC15752606913D00544E32 /* ThirstySoftRegular.otf in Resources */,
 				D3D623CB26068EDC00213277 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D623C826068EDC00213277 /* ViewController.swift in Sources */,
+				D3DC15802606A26700544E32 /* ChoiceView.swift in Sources */,
 				D3D623C426068EDC00213277 /* AppDelegate.swift in Sources */,
 				D3D623C626068EDC00213277 /* SceneDelegate.swift in Sources */,
 			);
