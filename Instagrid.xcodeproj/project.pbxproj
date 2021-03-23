@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D32C5413260916AD005E6EF3 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C5412260916AD005E6EF3 /* ChoiceView.swift */; };
+		D357DADF260A89B3005ADB9F /* ViewSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D357DADE260A89B3005ADB9F /* ViewSelect.swift */; };
 		D3D623C426068EDC00213277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C326068EDC00213277 /* AppDelegate.swift */; };
 		D3D623C626068EDC00213277 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C526068EDC00213277 /* SceneDelegate.swift */; };
 		D3D623C826068EDC00213277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C726068EDC00213277 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		D32C5412260916AD005E6EF3 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
+		D357DADE260A89B3005ADB9F /* ViewSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSelect.swift; sourceTree = "<group>"; };
 		D3D623C026068EDC00213277 /* Instagrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D623C326068EDC00213277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3D623C526068EDC00213277 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				D3D623C926068EDC00213277 /* Main.storyboard */,
+				D357DADE260A89B3005ADB9F /* ViewSelect.swift */,
 				D32C5412260916AD005E6EF3 /* ChoiceView.swift */,
 			);
 			path = view;
@@ -182,6 +185,7 @@
 			files = (
 				D3D623C826068EDC00213277 /* ViewController.swift in Sources */,
 				D3D623C426068EDC00213277 /* AppDelegate.swift in Sources */,
+				D357DADF260A89B3005ADB9F /* ViewSelect.swift in Sources */,
 				D3D623C626068EDC00213277 /* SceneDelegate.swift in Sources */,
 				D32C5413260916AD005E6EF3 /* ChoiceView.swift in Sources */,
 			);

@@ -10,20 +10,14 @@ import UIKit
 class ViewController: UIViewController{
 
     
-    @IBOutlet weak var buttonOne: UIButton!
-    @IBOutlet weak var buttonTwo: UIButton!
-    @IBOutlet weak var buttonThree: UIButton!
+    
+    @IBOutlet weak var buttonView: ViewSelect!
     @IBOutlet weak var choiceView: ChoiceView!
     var chooseButton : UIButton!
     
-
-    
-    
-
-    
     override func viewDidLoad() {
          super.viewDidLoad()
-         buttonViewTwo(buttonTwo)
+        choiceView(.choiceTwo)
      }
     
     
@@ -35,21 +29,15 @@ class ViewController: UIViewController{
         switch choice{
         case .choiceOne:
             choiceView.style = .viewOne
-            buttonOne.isSelected = true
-            buttonTwo.isSelected = false
-            buttonThree.isSelected = false
+            buttonView.style = .viewOne
             
         case .choiceTwo:
             choiceView.style = .viewTwo
-            buttonOne.isSelected = false
-            buttonTwo.isSelected = true
-            buttonThree.isSelected = false
+            buttonView.style = .viewTwo
 
         case .choiceThree:
             choiceView.style = .viewThree
-            buttonOne.isSelected = false
-            buttonTwo.isSelected = false
-            buttonThree.isSelected = true
+            buttonView.style = .viewThree
         }
     }
     
@@ -57,17 +45,14 @@ class ViewController: UIViewController{
     
     @IBAction func buttonViewOne(_ sender: UIButton) {
         choiceView(.choiceOne)
-        buttonOne.setImage(UIImage(named : "Selected"), for: .selected)
     }
     
     @IBAction func buttonViewTwo(_ sender: UIButton) {
         choiceView(.choiceTwo)
-        buttonTwo.setImage(UIImage(named: "Selected"), for: .selected)
     }
     
     @IBAction func buttonViewThree(_ sender: UIButton) {
         choiceView(.choiceThree)
-        buttonThree.setImage(UIImage(named: "Selected"), for: .selected)
     }
     
     
