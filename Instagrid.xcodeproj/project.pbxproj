@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D32C5413260916AD005E6EF3 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C5412260916AD005E6EF3 /* ChoiceView.swift */; };
 		D3D623C426068EDC00213277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C326068EDC00213277 /* AppDelegate.swift */; };
 		D3D623C626068EDC00213277 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C526068EDC00213277 /* SceneDelegate.swift */; };
 		D3D623C826068EDC00213277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D623C726068EDC00213277 /* ViewController.swift */; };
@@ -15,10 +16,10 @@
 		D3D623D026068EDD00213277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3D623CE26068EDD00213277 /* LaunchScreen.storyboard */; };
 		D3DC15752606913D00544E32 /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DC15742606913D00544E32 /* ThirstySoftRegular.otf */; };
 		D3DC15782606914500544E32 /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D3DC15772606914500544E32 /* Delm-Medium.otf */; };
-		D3DC15802606A26700544E32 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DC157F2606A26700544E32 /* ChoiceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D32C5412260916AD005E6EF3 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 		D3D623C026068EDC00213277 /* Instagrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D623C326068EDC00213277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3D623C526068EDC00213277 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,7 +30,6 @@
 		D3D623D126068EDD00213277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3DC15742606913D00544E32 /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
 		D3DC15772606914500544E32 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
-		D3DC157F2606A26700544E32 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				D3D623C926068EDC00213277 /* Main.storyboard */,
-				D3DC157F2606A26700544E32 /* ChoiceView.swift */,
+				D32C5412260916AD005E6EF3 /* ChoiceView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -181,9 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D623C826068EDC00213277 /* ViewController.swift in Sources */,
-				D3DC15802606A26700544E32 /* ChoiceView.swift in Sources */,
 				D3D623C426068EDC00213277 /* AppDelegate.swift in Sources */,
 				D3D623C626068EDC00213277 /* SceneDelegate.swift in Sources */,
+				D32C5413260916AD005E6EF3 /* ChoiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
