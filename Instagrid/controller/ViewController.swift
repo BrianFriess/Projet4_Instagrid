@@ -13,19 +13,95 @@ class ViewController: UIViewController{
     
     @IBOutlet weak var buttonView: ViewSelect!
     @IBOutlet weak var choiceView: ChoiceView!
-    var chooseButton : UIButton!
+    @IBOutlet weak var labelText: UILabel!
+    @IBOutlet weak var arrowUp: UIImageView!
+    private(set) var chooseButton : UIButton!
+    private var IsOnMove = false
     
     override func viewDidLoad() {
-         super.viewDidLoad()
-        choiceView(.choiceTwo)
+        super.viewDidLoad()
+        moveArrowUp()
+        view(.choiceTwo)
+        
+        //we create the GestureRecognizer "swipe up" with ChoiceView
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewUp(_:)))
+        swipeUp.direction = .up
+        choiceView.addGestureRecognizer(swipeUp)
      }
     
     
-    enum View{
+
+    //this function animates choiceView to go up and call the function activityView
+    @objc func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
+
+        let screenHeight = UIScreen.main.bounds.height
+        let translationUp = CGAffineTransform(translationX:0, y: -screenHeight/2)
+        IsOnMove = true
+        UIView.animate(withDuration: 1) {
+            self.choiceView.transform = translationUp
+            self.labelText.transform = translationUp
+            self.arrowUp.transform = translationUp
+        } completion: { (success )in
+            self.activityView()
+        }
+    }
+    
+    
+    private func AnimationReturnView(){
+        UIView.animate(withDuration: 1) {
+            self.choiceView.transform = .identity
+            self.labelText.transform = .identity
+            self.arrowUp.transform = .identity
+        }
+        self.IsOnMove = false
+        self.moveArrowUp()
+    }
+    
+    
+    //we call the activity view for share choiceView
+    func activityView(){
+        UIGraphicsBeginImageContext(choiceView.frame.size)
+        choiceView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let ac = UIActivityViewController(activityItems:[image!], applicationActivities: nil)
+        present(ac, animated: true) {
+        }
+    }
+    
+    
+    // moveArrowUp and moveArrowDown functions is there to animate a floating arrow
+    func moveArrowUp(){
+        if IsOnMove == false{
+            let moveUp = CGAffineTransform(translationX: 0, y: -2.5)
+            UIView.animate(withDuration: 0.5) {
+                self.arrowUp.transform = moveUp
+            } completion: { (success) in
+                self.moveArrowDown()
+            }
+        }
+    }
+    
+    func moveArrowDown(){
+        if IsOnMove == false{
+            let moveDown = CGAffineTransform(translationX: 0, y: 2.5)
+            UIView.animate(withDuration: 0.5) {
+                self.arrowUp.transform = moveDown
+            } completion: { (success) in
+                self.moveArrowUp()
+            }
+        }
+    }
+    
+    
+    
+    
+    private enum View{
         case choiceOne, choiceTwo, choiceThree
     }
     
-    func choiceView(_ choice : View){
+    
+    //we create  different views
+    private func view(_ choice : View){
         switch choice{
         case .choiceOne:
             choiceView.style = .viewOne
@@ -42,44 +118,41 @@ class ViewController: UIViewController{
     }
     
     
-    
-    @IBAction func buttonViewOne(_ sender: UIButton) {
-        choiceView(.choiceOne)
+    //different view are defined when we press a button
+    @IBAction private func buttonViewOne(_ sender: UIButton) {
+        view(.choiceOne)
     }
     
-    @IBAction func buttonViewTwo(_ sender: UIButton) {
-        choiceView(.choiceTwo)
+    @IBAction private func buttonViewTwo(_ sender: UIButton) {
+        view(.choiceTwo)
     }
     
-    @IBAction func buttonViewThree(_ sender: UIButton) {
-        choiceView(.choiceThree)
+    @IBAction private func buttonViewThree(_ sender: UIButton) {
+        view(.choiceThree)
     }
     
     
     
-    @IBAction func buttonTopLeft(_ sender: UIButton) {
+    @IBAction private func buttonTopLeft(_ sender: UIButton) {
         displayPhotoLibrary()
         chooseButton = choiceView.buttonTopLeft
     }
     
-    @IBAction func buttonTopRight(_ sender: UIButton) {
+    @IBAction private func buttonTopRight(_ sender: UIButton) {
         displayPhotoLibrary()
         chooseButton = choiceView.buttonTopRight
     }
     
-    @IBAction func buttonDownLeft(_ sender: UIButton) {
+    @IBAction private func buttonDownLeft(_ sender: UIButton) {
         displayPhotoLibrary()
         chooseButton = choiceView.buttonDownLeft
     }
     
-    @IBAction func buttonDownRight(_ sender: UIButton) {
+    @IBAction private func buttonDownRight(_ sender: UIButton) {
         displayPhotoLibrary()
         chooseButton = choiceView.buttonDownRight
     }
-    
-
 }
-
 
 
 

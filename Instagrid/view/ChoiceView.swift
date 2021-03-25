@@ -9,12 +9,10 @@ import UIKit
 
 class ChoiceView: UIView {
 
-    @IBOutlet var buttonTopLeft : UIButton!
-    @IBOutlet var buttonTopRight : UIButton!
-    @IBOutlet var buttonDownLeft : UIButton!
-    @IBOutlet var buttonDownRight : UIButton!
-    
-    
+    @IBOutlet private(set) var buttonTopLeft : UIButton!
+    @IBOutlet private(set) var buttonTopRight : UIButton!
+    @IBOutlet private(set) var buttonDownLeft : UIButton!
+    @IBOutlet private(set) var buttonDownRight : UIButton!
     
     
     enum StyleView{
@@ -29,7 +27,7 @@ class ChoiceView: UIView {
           }
       }
     
-    func setStyle(_ style : StyleView){
+    private func setStyle(_ style : StyleView){
         switch style{
         case .viewOne:
             buttonTopRight.isHidden = true

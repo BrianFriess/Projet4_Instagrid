@@ -9,9 +9,9 @@ import UIKit
 
 class ViewSelect: UIStackView {
     
-    @IBOutlet var buttonOne : UIButton!
-    @IBOutlet var buttonTwo : UIButton!
-    @IBOutlet var buttonThree : UIButton!
+    @IBOutlet private var buttonOne : UIButton!
+    @IBOutlet private var buttonTwo : UIButton!
+    @IBOutlet private var buttonThree : UIButton!
 
     enum StyleView{
           case viewOne
@@ -27,7 +27,7 @@ class ViewSelect: UIStackView {
     
     
     
-    func setStyle(_ style : StyleView){
+    private func setStyle(_ style : StyleView){
         switch style{
         case .viewOne:
             buttonOne.isSelected = true
