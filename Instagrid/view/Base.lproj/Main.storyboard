@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -17,11 +17,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Instagrid" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="l7G-VK-b5E" customClass="ViewSelect" customModule="Instagrid" customModuleProvider="target">
-                                <rect key="frame" x="74" y="780" width="280" height="80"/>
+                                <rect key="frame" x="67" y="624" width="280" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bg7-Rk-uvh" userLabel="Layout 2">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -83,17 +83,17 @@
                                 </connections>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Instagrid" translatesAutoresizingMaskIntoConstraints="NO" id="7wW-Fh-24f">
-                                <rect key="frame" x="156" y="72" width="116" height="30"/>
+                                <rect key="frame" x="149" y="28" width="116" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="116" id="K1s-4m-uHJ"/>
                                     <constraint firstAttribute="height" constant="30" id="dkw-VN-oFs"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRQ-k7-9Bk" customClass="ChoiceView" customModule="Instagrid" customModuleProvider="target">
-                                <rect key="frame" x="64" y="313" width="300" height="300"/>
+                                <rect key="frame" x="57" y="218" width="300" height="300"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MSt-Vl-YhT">
-                                        <rect key="frame" x="15.666666666666686" y="15.666666666666686" width="269" height="269"/>
+                                        <rect key="frame" x="15.666666666666686" y="15.666666666666657" width="269" height="269"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sJN-A3-6lE">
                                                 <rect key="frame" x="0.0" y="0.0" width="269" height="127"/>
@@ -139,7 +139,7 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IwR-rM-ij5">
-                                                <rect key="frame" x="0.0" y="142" width="269" height="127"/>
+                                                <rect key="frame" x="0.0" y="142.00000000000003" width="269" height="126.99999999999997"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-rh-gbD">
                                                         <rect key="frame" x="0.0" y="0.0" width="127" height="127"/>
@@ -199,12 +199,12 @@
                                 <color key="backgroundColor" red="0.062745101750000004" green="0.40000003579999999" blue="0.59607845540000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="7gZ-hy-OR3"/>
                                     <constraint firstItem="MSt-Vl-YhT" firstAttribute="top" secondItem="rRQ-k7-9Bk" secondAttribute="top" constant="15.5" id="F4a-xD-Mqd"/>
                                     <constraint firstAttribute="trailing" secondItem="MSt-Vl-YhT" secondAttribute="trailing" constant="15.5" id="QAs-rO-jEA"/>
                                     <constraint firstItem="MSt-Vl-YhT" firstAttribute="leading" secondItem="rRQ-k7-9Bk" secondAttribute="leading" constant="15.5" id="TOe-sj-IMa"/>
                                     <constraint firstAttribute="width" constant="300" id="UR4-3e-vpB"/>
                                     <constraint firstItem="MSt-Vl-YhT" firstAttribute="centerY" secondItem="rRQ-k7-9Bk" secondAttribute="centerY" id="hqj-AW-XYX"/>
+                                    <constraint firstAttribute="width" secondItem="rRQ-k7-9Bk" secondAttribute="height" multiplier="1:1" id="jfT-GD-y2D"/>
                                     <constraint firstAttribute="bottom" secondItem="MSt-Vl-YhT" secondAttribute="bottom" constant="15.5" id="uyR-fn-kB4"/>
                                     <constraint firstItem="MSt-Vl-YhT" firstAttribute="centerX" secondItem="rRQ-k7-9Bk" secondAttribute="centerX" id="ySa-E3-7dQ"/>
                                 </constraints>
@@ -216,14 +216,14 @@
                                 </connections>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Arrow Up" translatesAutoresizingMaskIntoConstraints="NO" id="EIB-Ls-VFP">
-                                <rect key="frame" x="209.66666666666666" y="252" width="9" height="13"/>
+                                <rect key="frame" x="202.66666666666666" y="157" width="9" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="7KV-o7-6Xj"/>
                                     <constraint firstAttribute="width" constant="9" id="DBg-7q-ilR"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe up to share" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-TU-alM">
-                                <rect key="frame" x="134" y="274" width="160.33333333333337" height="29"/>
+                                <rect key="frame" x="127.00000000000001" y="179" width="160.33333333333337" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="oRA-T6-mFC"/>
                                 </constraints>

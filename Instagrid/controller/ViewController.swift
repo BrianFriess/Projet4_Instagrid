@@ -11,11 +11,11 @@ class ViewController: UIViewController{
 
     
     
-    @IBOutlet weak var buttonView: ViewSelect!
-    @IBOutlet weak var choiceView: ChoiceView!
-    @IBOutlet weak var labelText: UILabel!
-    @IBOutlet weak var arrowUp: UIImageView!
-    private(set) var chooseButton : UIButton!
+    @IBOutlet weak private var buttonView: ViewSelect!
+    @IBOutlet weak private var choiceView: ChoiceView!
+    @IBOutlet weak private var labelText: UILabel!
+    @IBOutlet weak private var arrowUp: UIImageView!
+    private var chooseButton : UIButton!
     private var IsOnMove = false
     
     override func viewDidLoad() {
@@ -32,12 +32,12 @@ class ViewController: UIViewController{
     
 
     //this function animates choiceView to go up and call the function activityView
-    @objc func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
+    @objc private func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
 
         let screenHeight = UIScreen.main.bounds.height
-        let translationUp = CGAffineTransform(translationX:0, y: -screenHeight/2)
+        let translationUp = CGAffineTransform(translationX:0, y: -screenHeight)
         IsOnMove = true
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.choiceView.transform = translationUp
             self.labelText.transform = translationUp
             self.arrowUp.transform = translationUp
@@ -48,7 +48,7 @@ class ViewController: UIViewController{
     
     
     private func AnimationReturnView(){
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.choiceView.transform = .identity
             self.labelText.transform = .identity
             self.arrowUp.transform = .identity
@@ -59,18 +59,23 @@ class ViewController: UIViewController{
     
     
     //we call the activity view for share choiceView
-    func activityView(){
+   private func activityView(){
         UIGraphicsBeginImageContext(choiceView.frame.size)
         choiceView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        let ac = UIActivityViewController(activityItems:[image!], applicationActivities: nil)
-        present(ac, animated: true) {
+        let activityConroller = UIActivityViewController(activityItems:[image!], applicationActivities: nil)
+    
+        activityConroller.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed:Bool, arrayReturnedItems: [Any]?, error: Error?) in
+            self.AnimationReturnView()
+            self.dismiss(animated: true, completion: nil)
         }
+        present(activityConroller, animated: true)
+        
     }
     
     
     // moveArrowUp and moveArrowDown functions is there to animate a floating arrow
-    func moveArrowUp(){
+    private func moveArrowUp(){
         if IsOnMove == false{
             let moveUp = CGAffineTransform(translationX: 0, y: -2.5)
             UIView.animate(withDuration: 0.5) {
@@ -81,7 +86,7 @@ class ViewController: UIViewController{
         }
     }
     
-    func moveArrowDown(){
+   private func moveArrowDown(){
         if IsOnMove == false{
             let moveDown = CGAffineTransform(translationX: 0, y: 2.5)
             UIView.animate(withDuration: 0.5) {
@@ -174,7 +179,6 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
             chooseButton.contentMode = .scaleAspectFill
             chooseButton.clipsToBounds = true
         }
-        
         dismiss(animated: true, completion: nil)
     }
 }
