@@ -16,33 +16,83 @@ class ViewController: UIViewController{
     @IBOutlet weak private var labelText: UILabel!
     @IBOutlet weak private var arrowUp: UIImageView!
     private var chooseButton : UIButton!
-    private var IsOnMove = false
+    var orientation = Orientation()
+    var isLandscape = false
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        moveArrowUp()
+        
         view(.choiceTwo)
         
         //we create the GestureRecognizer "swipe up" with ChoiceView
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewUp(_:)))
         swipeUp.direction = .up
         choiceView.addGestureRecognizer(swipeUp)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewLeft(_:)))
+        swipeLeft.direction = .left
+        choiceView.addGestureRecognizer(swipeLeft)
+        
+        
+        let name = Notification.Name(rawValue: "returnOrientation")
+        NotificationCenter.default.addObserver(self, selector: #selector(SetOrientation), name: name, object: nil)
+        
+        
      }
     
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        changeOrientation()
+    }
+    
+    
+    
+    func changeOrientation(){
+        orientation.setUpOrientation(isLandscape: UIDevice.current.orientation.isLandscape == true)
+    }
+    
+    
+    
+    @objc func SetOrientation(_ notification : Notification){
+        guard let changeOrientation = notification.object as? Orientation.Style else {return}
+        labelText.text = changeOrientation.text
+        if changeOrientation == .landscape{
+            isLandscape = true
+        }else{
+            isLandscape = false
+        }
+    }
 
+    
     //this function animates choiceView to go up and call the function activityView
     @objc private func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
-
-        let screenHeight = UIScreen.main.bounds.height
-        let translationUp = CGAffineTransform(translationX:0, y: -screenHeight)
-        IsOnMove = true
-        UIView.animate(withDuration: 0.5) {
-            self.choiceView.transform = translationUp
-            self.labelText.transform = translationUp
-            self.arrowUp.transform = translationUp
-        } completion: { (success )in
-            self.activityView()
+        if isLandscape == false{
+            let screenHeight = UIScreen.main.bounds.height
+            let translationUp = CGAffineTransform(translationX:0, y: -screenHeight)
+            UIView.animate(withDuration: 0.5) {
+                self.choiceView.transform = translationUp
+                self.labelText.transform = translationUp
+                self.arrowUp.transform = translationUp
+            } completion: { (success )in
+                self.activityView()
+            }
+        }
+    }
+    
+    
+    @objc private func swipeViewLeft(_ sender: UISwipeGestureRecognizer) {
+        if isLandscape == true{
+            let screenWidth = UIScreen.main.bounds.width
+            let translationUp = CGAffineTransform(translationX: -screenWidth , y: 0)
+            UIView.animate(withDuration: 0.5) {
+                self.choiceView.transform = translationUp
+                self.labelText.transform = translationUp
+                self.arrowUp.transform = translationUp
+            } completion: { (success )in
+                self.activityView()
+            }
         }
     }
     
@@ -53,8 +103,6 @@ class ViewController: UIViewController{
             self.labelText.transform = .identity
             self.arrowUp.transform = .identity
         }
-        self.IsOnMove = false
-        self.moveArrowUp()
     }
     
     
@@ -62,10 +110,10 @@ class ViewController: UIViewController{
    private func activityView(){
         UIGraphicsBeginImageContext(choiceView.frame.size)
         choiceView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        let activityConroller = UIActivityViewController(activityItems:[image!], applicationActivities: nil)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return}
+        let activityConroller = UIActivityViewController(activityItems:[image], applicationActivities: nil)
     
-        activityConroller.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed:Bool, arrayReturnedItems: [Any]?, error: Error?) in
+        activityConroller.completionWithItemsHandler = { (_, _, _, _) in
             self.AnimationReturnView()
             self.dismiss(animated: true, completion: nil)
         }
@@ -74,7 +122,9 @@ class ViewController: UIViewController{
     }
     
     
-    // moveArrowUp and moveArrowDown functions is there to animate a floating arrow
+    
+    
+    /*// moveArrowUp and moveArrowDown functions is there to animate a floating arrow
     private func moveArrowUp(){
         if IsOnMove == false{
             let moveUp = CGAffineTransform(translationX: 0, y: -2.5)
@@ -96,6 +146,28 @@ class ViewController: UIViewController{
             }
         }
     }
+    
+    private func moveArrowLeft(){
+        if IsOnMove == false{
+            let moveUp = CGAffineTransform(translationX: -2.5, y:0)
+            UIView.animate(withDuration: 0.5) {
+                self.arrowUp.transform = moveUp
+            } completion: { (success) in
+                self.moveArrowRight()
+            }
+        }
+    }
+    
+   private func moveArrowRight(){
+        if IsOnMove == false{
+            let moveDown = CGAffineTransform(translationX: 2.5, y: 0)
+            UIView.animate(withDuration: 0.5) {
+                self.arrowUp.transform = moveDown
+            } completion: { (success) in
+                self.moveArrowLeft()
+            }
+        }
+    }*/
     
     
     
@@ -135,6 +207,7 @@ class ViewController: UIViewController{
     @IBAction private func buttonViewThree(_ sender: UIButton) {
         view(.choiceThree)
     }
+    
     
     
     

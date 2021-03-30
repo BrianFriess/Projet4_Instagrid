@@ -9,15 +9,18 @@ import UIKit
 
 class ViewSelect: UIStackView {
     
+    //creation of the 3 outlets for choice the view
     @IBOutlet private var buttonOne : UIButton!
     @IBOutlet private var buttonTwo : UIButton!
     @IBOutlet private var buttonThree : UIButton!
 
+    
     enum StyleView{
           case viewOne
           case viewTwo
           case viewThree
       }
+    
     
     var style : StyleView = .viewTwo{
         didSet{
