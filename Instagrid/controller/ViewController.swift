@@ -16,8 +16,8 @@ class ViewController: UIViewController{
     @IBOutlet weak private var labelText: UILabel!
     @IBOutlet weak private var arrowUp: UIImageView!
     private var chooseButton : UIButton!
-    var orientation = Orientation()
     var isLandscape = false
+
     
     
     
@@ -34,13 +34,22 @@ class ViewController: UIViewController{
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewLeft(_:)))
         swipeLeft.direction = .left
         choiceView.addGestureRecognizer(swipeLeft)
-        
-        
-        let name = Notification.Name(rawValue: "returnOrientation")
-        NotificationCenter.default.addObserver(self, selector: #selector(SetOrientation), name: name, object: nil)
-        
-        
+
+        orientationStartApps()
      }
+    
+    
+    //we use this function to determine the orientation when starting the application
+    func orientationStartApps()  {
+        let size : Bool  = self.view.frame.size.width > self.view.frame.size.height
+        if size == true {
+            labelText.text =  "Swipe left to share"
+            isLandscape = true
+        }else{
+            labelText.text = "Swipe up to share"
+            isLandscape = false
+        }
+    }
     
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -48,23 +57,18 @@ class ViewController: UIViewController{
     }
     
     
-    
     func changeOrientation(){
-        orientation.setUpOrientation(isLandscape: UIDevice.current.orientation.isLandscape == true)
-    }
-    
-    
-    
-    @objc func SetOrientation(_ notification : Notification){
-        guard let changeOrientation = notification.object as? Orientation.Style else {return}
-        labelText.text = changeOrientation.text
-        if changeOrientation == .landscape{
+        if UIDevice.current.orientation.isLandscape {
             isLandscape = true
-        }else{
+            labelText.text = "Swipe left to share"
+        }else if UIDevice.current.orientation.isPortrait{
             isLandscape = false
+            labelText.text = "Swipe up to share"
         }
     }
 
+    
+    
     
     //this function animates choiceView to go up and call the function activityView
     @objc private func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
@@ -95,16 +99,7 @@ class ViewController: UIViewController{
             }
         }
     }
-    
-    
-    private func AnimationReturnView(){
-        UIView.animate(withDuration: 0.5) {
-            self.choiceView.transform = .identity
-            self.labelText.transform = .identity
-            self.arrowUp.transform = .identity
-        }
-    }
-    
+
     
     //we call the activity view for share choiceView
    private func activityView(){
@@ -118,58 +113,16 @@ class ViewController: UIViewController{
             self.dismiss(animated: true, completion: nil)
         }
         present(activityConroller, animated: true)
-        
     }
     
     
-    
-    
-    /*// moveArrowUp and moveArrowDown functions is there to animate a floating arrow
-    private func moveArrowUp(){
-        if IsOnMove == false{
-            let moveUp = CGAffineTransform(translationX: 0, y: -2.5)
-            UIView.animate(withDuration: 0.5) {
-                self.arrowUp.transform = moveUp
-            } completion: { (success) in
-                self.moveArrowDown()
-            }
+    private func AnimationReturnView(){
+        UIView.animate(withDuration: 0.5) {
+            self.choiceView.transform = .identity
+            self.labelText.transform = .identity
+            self.arrowUp.transform = .identity
         }
     }
-    
-   private func moveArrowDown(){
-        if IsOnMove == false{
-            let moveDown = CGAffineTransform(translationX: 0, y: 2.5)
-            UIView.animate(withDuration: 0.5) {
-                self.arrowUp.transform = moveDown
-            } completion: { (success) in
-                self.moveArrowUp()
-            }
-        }
-    }
-    
-    private func moveArrowLeft(){
-        if IsOnMove == false{
-            let moveUp = CGAffineTransform(translationX: -2.5, y:0)
-            UIView.animate(withDuration: 0.5) {
-                self.arrowUp.transform = moveUp
-            } completion: { (success) in
-                self.moveArrowRight()
-            }
-        }
-    }
-    
-   private func moveArrowRight(){
-        if IsOnMove == false{
-            let moveDown = CGAffineTransform(translationX: 2.5, y: 0)
-            UIView.animate(withDuration: 0.5) {
-                self.arrowUp.transform = moveDown
-            } completion: { (success) in
-                self.moveArrowLeft()
-            }
-        }
-    }*/
-    
-    
     
     
     private enum View{
