@@ -7,6 +7,7 @@
 
 import UIKit
 
+// we create a class to manage the three buttons for the choice of the view
 class ViewSelect: UIStackView {
     
     //creation of the 3 outlets for choice the view
@@ -21,7 +22,7 @@ class ViewSelect: UIStackView {
           case viewThree
       }
     
-    
+    //when we change the value of style, we call the function "setStyle" with style as parameter
     var style : StyleView = .viewTwo{
         didSet{
             setStyle(style)
@@ -29,13 +30,15 @@ class ViewSelect: UIStackView {
     }
     
     
-    
+    //this function changes the selection and the image of the buttons
     private func setStyle(_ style : StyleView){
         switch style{
         case .viewOne:
+            //we select and deselect all the buttons
             buttonOne.isSelected = true
             buttonTwo.isSelected = false
             buttonThree.isSelected = false
+            //we change the image of the button when the button is selected
             buttonOne.setImage(UIImage(named : "Selected"), for: .selected)
         case .viewTwo:
             buttonOne.isSelected = false

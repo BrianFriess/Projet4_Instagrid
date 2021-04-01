@@ -7,6 +7,7 @@
 
 import UIKit
 
+//this class, manages the differents views to choose the pictures
 class ChoiceView: UIView {
 
     @IBOutlet private(set) var buttonTopLeft : UIButton!
@@ -21,12 +22,14 @@ class ChoiceView: UIView {
           case viewThree
       }
       
+    //when we change the value of style, we call the function "setStyle" with style as parameter
       var style : StyleView = .viewTwo{
           didSet{
               setStyle(style)
           }
       }
     
+    //this function manages the visible or invisible views
     private func setStyle(_ style : StyleView){
         switch style{
         case .viewOne:

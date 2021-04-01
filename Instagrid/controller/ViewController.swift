@@ -16,78 +16,67 @@ class ViewController: UIViewController{
     @IBOutlet weak private var labelText: UILabel!
     @IBOutlet weak private var arrowUp: UIImageView!
     private var chooseButton : UIButton!
-    var isLandscape = false
+    var swipe = UISwipeGestureRecognizer()
 
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view(.choiceTwo)
         
-        //we create the GestureRecognizer "swipe up" with ChoiceView
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewUp(_:)))
-        swipeUp.direction = .up
-        choiceView.addGestureRecognizer(swipeUp)
+        // we give the parameters to "swipe"
+        swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeView))
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeViewLeft(_:)))
-        swipeLeft.direction = .left
-        choiceView.addGestureRecognizer(swipeLeft)
-
-        orientationStartApps()
+        //we create the gesture
+        choiceView.addGestureRecognizer(swipe)
      }
-    
-    
-    //we use this function to determine the orientation when starting the application
-    func orientationStartApps()  {
-        let size : Bool  = self.view.frame.size.width > self.view.frame.size.height
-        if size == true {
-            labelText.text =  "Swipe left to share"
-            isLandscape = true
-        }else{
-            labelText.text = "Swipe up to share"
-            isLandscape = false
-        }
-    }
-    
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+
+    //this function is use to recognize the orientation of the phone
+    override func viewWillLayoutSubviews() {
         changeOrientation()
     }
     
-    
+    //this function is used for change the value of "LabelText" and the direction of "swipe"
     func changeOrientation(){
         if UIDevice.current.orientation.isLandscape {
-            isLandscape = true
             labelText.text = "Swipe left to share"
+            swipe.direction = .left
         }else if UIDevice.current.orientation.isPortrait{
-            isLandscape = false
             labelText.text = "Swipe up to share"
+            swipe.direction = .up
         }
     }
+    
 
+    //this function is called when we make a gesture on choiceView
+    @objc private func swipeView(){
+        if swipe.direction == .up{
+            swipeViewUp()
+        }else if swipe.direction == .left{
+            swipeViewLeft()
+        }
+    }
     
     
-    
-    //this function animates choiceView to go up and call the function activityView
-    @objc private func swipeViewUp(_ sender: UISwipeGestureRecognizer) {
-        if isLandscape == false{
+    //this function animates choiceView to go up and calls the function activityView
+    private func swipeViewUp() {
+            //we take the screenHeight
             let screenHeight = UIScreen.main.bounds.height
+            //we create a mouvement
             let translationUp = CGAffineTransform(translationX:0, y: -screenHeight)
+            //we create an animation
             UIView.animate(withDuration: 0.5) {
                 self.choiceView.transform = translationUp
                 self.labelText.transform = translationUp
                 self.arrowUp.transform = translationUp
+                // when the animation is a success, we call activityView
             } completion: { (success )in
                 self.activityView()
             }
-        }
     }
     
-    
-    @objc private func swipeViewLeft(_ sender: UISwipeGestureRecognizer) {
-        if isLandscape == true{
+    //this function animates choiceView to go left and calls the function activityView
+    private func swipeViewLeft() {
             let screenWidth = UIScreen.main.bounds.width
             let translationUp = CGAffineTransform(translationX: -screenWidth , y: 0)
             UIView.animate(withDuration: 0.5) {
@@ -97,25 +86,32 @@ class ViewController: UIViewController{
             } completion: { (success )in
                 self.activityView()
             }
-        }
     }
 
     
     //we call the activity view for share choiceView
    private func activityView(){
+        //demander comment fonctionne ces 3 lignes de code
         UIGraphicsBeginImageContext(choiceView.frame.size)
         choiceView.layer.render(in: UIGraphicsGetCurrentContext()!)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return}
+    
+        //we create the activityController
         let activityConroller = UIActivityViewController(activityItems:[image], applicationActivities: nil)
     
+        //we call the activityController
+        present(activityConroller, animated: true)
+    
+        //when we close the activity controller, we call the function "AnimationReturnView"
         activityConroller.completionWithItemsHandler = { (_, _, _, _) in
             self.AnimationReturnView()
+            
+            //pas sûr d'avoir besoin de ça
             self.dismiss(animated: true, completion: nil)
         }
-        present(activityConroller, animated: true)
     }
     
-    
+    //this function allows choiceView to find its position
     private func AnimationReturnView(){
         UIView.animate(withDuration: 0.5) {
             self.choiceView.transform = .identity
@@ -148,7 +144,7 @@ class ViewController: UIViewController{
     }
     
     
-    //different view are defined when we press a button
+    //the different views are set when we press a button
     @IBAction private func buttonViewOne(_ sender: UIButton) {
         view(.choiceOne)
     }
@@ -163,7 +159,7 @@ class ViewController: UIViewController{
     
     
     
-    
+    //when we press a button in the choiceView, we call the function "displayPhotoLibrary" and we give the value of the button at chooseButton
     @IBAction private func buttonTopLeft(_ sender: UIButton) {
         displayPhotoLibrary()
         chooseButton = choiceView.buttonTopLeft
@@ -190,21 +186,26 @@ class ViewController: UIViewController{
 
 extension ViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
+    //we create this function  for create an ImagePickerController and display the photoLibrary
     private func displayPhotoLibrary(){
-
         let imagePicker = UIImagePickerController()
+        //redemander pour le delegate
         imagePicker.delegate = self
+        //we choose as source the photo library
         imagePicker.sourceType = .photoLibrary
+        //we open the photo Library
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-
+    //this function is for choose one picture in the photo Library
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //if we choose an image, the image of chooseButton changes
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             chooseButton.setImage(pickedImage, for: .normal)
             chooseButton.contentMode = .scaleAspectFill
             chooseButton.clipsToBounds = true
         }
+        //we close the photo Library when we have choose an image
         dismiss(animated: true, completion: nil)
     }
 }
