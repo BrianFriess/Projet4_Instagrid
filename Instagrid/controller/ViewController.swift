@@ -31,10 +31,12 @@ class ViewController: UIViewController{
         choiceView.addGestureRecognizer(swipe)
      }
 
+    
     //this function is use to recognize the orientation of the phone
     override func viewWillLayoutSubviews() {
         changeOrientation()
     }
+    
     
     //this function is used for change the value of "LabelText" and the direction of "swipe"
     func changeOrientation(){
@@ -50,48 +52,31 @@ class ViewController: UIViewController{
 
     //this function is called when we make a gesture on choiceView
     @objc private func swipeView(){
+        //we take the screen Height and width
+        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = UIScreen.main.bounds.width
+        //we create a mouvement
+        let translation : CGAffineTransform
         if swipe.direction == .up{
-            swipeViewUp()
-        }else if swipe.direction == .left{
-            swipeViewLeft()
+            translation = CGAffineTransform(translationX:0, y: -screenHeight)
+        }else{
+            translation = CGAffineTransform(translationX: -screenWidth , y: 0)
+        }
+        //we create an animation
+        UIView.animate(withDuration: 0.5) {
+            self.choiceView.transform = translation
+            self.labelText.transform = translation
+            self.arrowUp.transform = translation
+            // when the animation is a success, we call activityView
+        } completion: { (success )in
+            self.activityView()
         }
     }
     
     
-    //this function animates choiceView to go up and calls the function activityView
-    private func swipeViewUp() {
-            //we take the screenHeight
-            let screenHeight = UIScreen.main.bounds.height
-            //we create a mouvement
-            let translationUp = CGAffineTransform(translationX:0, y: -screenHeight)
-            //we create an animation
-            UIView.animate(withDuration: 0.5) {
-                self.choiceView.transform = translationUp
-                self.labelText.transform = translationUp
-                self.arrowUp.transform = translationUp
-                // when the animation is a success, we call activityView
-            } completion: { (success )in
-                self.activityView()
-            }
-    }
-    
-    //this function animates choiceView to go left and calls the function activityView
-    private func swipeViewLeft() {
-            let screenWidth = UIScreen.main.bounds.width
-            let translationUp = CGAffineTransform(translationX: -screenWidth , y: 0)
-            UIView.animate(withDuration: 0.5) {
-                self.choiceView.transform = translationUp
-                self.labelText.transform = translationUp
-                self.arrowUp.transform = translationUp
-            } completion: { (success )in
-                self.activityView()
-            }
-    }
-
-    
     //we call the activity view for share choiceView
    private func activityView(){
-        //demander comment fonctionne ces 3 lignes de code
+        //we take the size of choiceView
         UIGraphicsBeginImageContext(choiceView.frame.size)
         choiceView.layer.render(in: UIGraphicsGetCurrentContext()!)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {return}
@@ -111,6 +96,7 @@ class ViewController: UIViewController{
         }
     }
     
+    
     //this function allows choiceView to find its position
     private func AnimationReturnView(){
         UIView.animate(withDuration: 0.5) {
@@ -121,9 +107,11 @@ class ViewController: UIViewController{
     }
     
     
+    
     private enum View{
         case choiceOne, choiceTwo, choiceThree
     }
+    
     
     
     //we create  different views
@@ -196,6 +184,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         //we open the photo Library
         self.present(imagePicker, animated: true, completion: nil)
     }
+    
     
     //this function is for choose one picture in the photo Library
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
