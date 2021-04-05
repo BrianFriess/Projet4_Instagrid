@@ -16,17 +16,16 @@ class ViewController: UIViewController{
     @IBOutlet weak private var labelText: UILabel!
     @IBOutlet weak private var arrowUp: UIImageView!
     private var chooseButton : UIButton!
-    var swipe = UISwipeGestureRecognizer()
-
+    
+    //we create the GestureRecognizer
+    lazy var swipe : UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target : self, action: #selector(swipeView(_:)))
+        return gesture
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view(.choiceTwo)
-        
-        // we give the parameters to "swipe"
-        swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeView))
-        
         //we create the gesture
         choiceView.addGestureRecognizer(swipe)
      }
@@ -39,7 +38,7 @@ class ViewController: UIViewController{
     
     
     //this function is used for change the value of "LabelText" and the direction of "swipe"
-    func changeOrientation(){
+    private func changeOrientation(){
         if UIDevice.current.orientation.isLandscape {
             labelText.text = "Swipe left to share"
             swipe.direction = .left
@@ -51,7 +50,7 @@ class ViewController: UIViewController{
     
 
     //this function is called when we make a gesture on choiceView
-    @objc private func swipeView(){
+    @objc private func swipeView(_ sender : UISwipeGestureRecognizer){
         //we take the screen Height and width
         let screenHeight = UIScreen.main.bounds.height
         let screenWidth = UIScreen.main.bounds.width
