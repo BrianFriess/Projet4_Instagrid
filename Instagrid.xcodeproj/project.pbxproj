@@ -67,17 +67,9 @@
 				D3DC157D2606950800544E32 /* supporting files */,
 				D3DC157C260694FD00544E32 /* controller */,
 				D3DC157B260694F700544E32 /* view */,
-				D3DC157A260694E900544E32 /* model */,
 				D3D623D126068EDD00213277 /* Info.plist */,
 			);
 			path = Instagrid;
-			sourceTree = "<group>";
-		};
-		D3DC157A260694E900544E32 /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		D3DC157B260694F700544E32 /* view */ = {

@@ -89,12 +89,8 @@ class ViewController: UIViewController{
         //when we close the activity controller, we call the function "AnimationReturnView"
         activityConroller.completionWithItemsHandler = { (_, _, _, _) in
             self.AnimationReturnView()
-            
-            //pas sûr d'avoir besoin de ça
-            self.dismiss(animated: true, completion: nil)
         }
     }
-    
     
     //this function allows choiceView to find its position
     private func AnimationReturnView(){
@@ -176,7 +172,6 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     //we create this function  for create an ImagePickerController and display the photoLibrary
     private func displayPhotoLibrary(){
         let imagePicker = UIImagePickerController()
-        //redemander pour le delegate
         imagePicker.delegate = self
         //we choose as source the photo library
         imagePicker.sourceType = .photoLibrary
