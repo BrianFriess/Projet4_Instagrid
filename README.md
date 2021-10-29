@@ -1,6 +1,7 @@
 # Projet4_Instagrid
 
 Projet professionnalisants n°4 de mon parcours OpenClassroom
+Création d'une application de montage photo
 
 Interpréter les gestes sur un écran tactile
 
